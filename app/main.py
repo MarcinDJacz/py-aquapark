@@ -83,11 +83,15 @@ class Slide:
         self.limitation_class = limitation_class
 
     def can_access(self, visitor: Visitor) -> bool:
-        limitation = self.limitation_class(age=visitor.age,
-                                           height=visitor.height,
-                                           weight=visitor.weight
-                                           )
-        if limitation:
-            return True
-        else:
+        try:
+            limitation = self.limitation_class(age=visitor.age,
+                                               height=visitor.height,
+                                               weight=visitor.weight
+                                               )
+        except ValueError:
+            print("Bad data")
             return False
+        print(limitation.age)
+        # local variable 'limitation' is assigned to but never used
+
+        return True
