@@ -15,7 +15,7 @@ class IntegerRange:
     def __set__(self, instance: type, value: any) -> None:
         if not isinstance(value, int):
             raise TypeError()
-        if self.min_amount > value > self.max_amount:
+        if not (self.min_amount <= value <= self.max_amount):
             raise ValueError()
         return getattr(instance, self.private_name)
 
@@ -51,11 +51,11 @@ class ChildrenSlideLimitationValidator(SlideLimitationValidator):
                  weight: float | int,
                  height: float | int
                  ) -> None:
-        if 4 > age > 14:
+        if not (4 <= age <= 14):
             raise ValueError("zły wiek")
-        elif 80 > height > 120:
+        elif not (80 <= height <= 120):
             raise ValueError("zły wzrost")
-        elif 20 > weight > 50:
+        elif not (20 <= weight <= 50):
             raise ValueError("Zla waga")
         else:
             super().__init__(age=age, weight=weight, height=height)
@@ -67,11 +67,11 @@ class AdultSlideLimitationValidator(SlideLimitationValidator):
                  weight: float | int,
                  height: float | int
                  ) -> None:
-        if 14 > age > 60:
+        if not (14 <= age <= 60):
             raise ValueError("zły wiek")
-        elif 120 > height > 220:
+        elif not (120 <= height <= 220):
             raise ValueError("zły wzrost")
-        elif 50 > weight > 120:
+        elif not (50 <= weight <= 120):
             raise ValueError("Zla waga")
         else:
             super().__init__(age=age, weight=weight, height=height)
